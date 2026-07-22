@@ -1,0 +1,676 @@
+﻿<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+  <link rel="icon" type="image/png" href="image/tanpa-nama.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IKRAABI — Ikatan Keluarga Alumni SMATQ ABI-UMMI</title>
+  <meta name="description"
+    content="IKRAABI adalah Ikatan Keluarga Alumni SMATQ ABI-UMMI: pusat informasi, pendataan, beasiswa, dan jejaring alumni di seluruh Indonesia.">
+  <meta name="theme-color" content="#154F92">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="IKRAABI — Ikatan Keluarga Alumni SMATQ ABI-UMMI">
+  <meta property="og:description"
+    content="Membangun jejaring alumni, berbagi inspirasi, dan menjadi jembatan menuju masa depan.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind (CDN, config inline) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (scroll animations) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Swiper (carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            arabic: ['Amiri', 'serif'],
+          },
+          colors: {
+            blue: { 1: '#1D6CB4', 2: '#154F92', 3: '#0F356B' },
+            orange: { 1: '#F07821', 2: '#E25E14', 3: '#C84E0C' },
+            gold: { 1: '#E5BA44', 2: '#C1932E', 3: '#8B6214' },
+          },
+          boxShadow: {
+            soft: '0 10px 40px -10px rgba(15,53,107,0.25)',
+            softlg: '0 25px 60px -15px rgba(15,53,107,0.35)',
+          },
+          borderRadius: { '4xl': '2rem' },
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="font-sans text-slate-700 dark:text-slate-200 bg-white dark:bg-[#081527] transition-colors duration-500">
+
+  <!-- =========================================================
+     KONFIGURASI GOOGLE FORM
+     Ganti seluruh URL di bawah ini dengan link Google Form asli.
+     Semua tombol pendataan pada halaman ini menarik dari objek ini.
+========================================================= -->
+  <script>
+    window.IKRAABI_CONFIG = {
+      forms: {
+        alumni: "https://forms.gle/CTHZmwJCbSgBP95s5",
+        ulangtahun: "https://forms.gle/WtYQQA3gsX3HmKUL9",
+        prestasi: "https://forms.google.com/xxxxxxxx-pendataan-prestasi",
+        kampus: "https://forms.google.com/xxxxxxxx-pendataan-kampus",
+        gabung: "https://forms.gle/CTHZmwJCbSgBP95s5"
+      },
+      social: {
+        instagram: "https://instagram.com/ikraabi.official",
+        email: "https://syuroalumnismatqau@gmail.com/syuroalumnismatqau@gmail.com"
+      }
+    };
+  </script>
+
+  <!-- Skip link -->
+  <a href="#main" class="skip-link">Lompat ke konten utama</a>
+
+  <!-- ============ ISLAMIC PATTERN DEFS (dipakai ulang via CSS var / SVG use) ============ -->
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <defs>
+      <pattern id="starPattern" width="56" height="56" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
+        <g fill="none" stroke="currentColor" stroke-width="1">
+          <path
+            d="M28 2 L34 16 L48 12 L38 22 L54 28 L38 34 L48 44 L34 40 L28 54 L22 40 L8 44 L18 34 L2 28 L18 22 L8 12 L22 16 Z" />
+        </g>
+      </pattern>
+    </defs>
+  </svg>
+
+  <!-- =============================== NAVBAR =============================== -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+    <nav class="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16 md:h-20"
+      aria-label="Navigasi utama">
+      <a href="#beranda" class="flex items-center gap-2.5 shrink-0 group">
+        <span class="logo-mark">
+          <img src="image/erasebg-transformed.png" alt="Logo IKRAABI" class="w-11 h-11 object-contain">
+        </span>
+        <span class="leading-tight">
+          <span id="logoText" class="block font-bold text-lg md:text-xl tracking-tight transition-colors">IKRAABI</span>
+          <span id="logoSub" class="block text-[10px] md:text-xs font-medium tracking-wide transition-colors">SMATQ
+            ABI-UMMI</span>
+        </span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-1 nav-links">
+        <li><a href="#beranda" class="nav-link">Beranda</a></li>
+        <li><a href="#tentang" class="nav-link">Tentang</a></li>
+        <li><a href="#program" class="nav-link">Program</a></li>
+        <li><a href="#informasi" class="nav-link">Informasi</a></li>
+        <li><a href="#pendataan" class="nav-link">Pendataan</a></li>
+        <li><a href="https://wa.link/pbik05" target="_blank" rel="noopener" class="nav-link">Kontak</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2 md:gap-3">
+        <button id="darkToggle" aria-label="Ganti mode gelap/terang" class="icon-btn">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+        </button>
+        <a href="#pendataan" class="hidden sm:inline-flex btn-primary-sm">
+          Pendataan <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+        <button id="menuToggle" aria-label="Buka menu" aria-expanded="false" class="icon-btn lg:hidden">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="lg:hidden mobile-menu">
+      <ul class="flex flex-col gap-1 px-6 py-4">
+        <li><a href="#beranda" class="mobile-link">Beranda</a></li>
+        <li><a href="#tentang" class="mobile-link">Tentang IKRAABI</a></li>
+        <li><a href="#program" class="mobile-link">Program</a></li>
+        <li><a href="#informasi" class="mobile-link">Informasi</a></li>
+        <li><a href="#pendataan" class="mobile-link">Pendataan</a></li>
+        <li><a href="#kontak" class="mobile-link">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- =============================== HERO =============================== -->
+    <section id="beranda" class="hero-section relative overflow-hidden">
+      <!-- floating blobs -->
+      <div class="blob blob-gold" aria-hidden="true"></div>
+      <div class="blob blob-orange" aria-hidden="true"></div>
+      <div class="star-overlay" aria-hidden="true"></div>
+
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 pt-32 pb-20 md:pt-40 md:pb-28 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+          <div data-aos="fade-right" data-aos-duration="800">
+            <span class="eyebrow-badge">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              Ikatan Keluarga Alumni
+            </span>
+            <h1 class="hero-title">
+              IKRAABI <span class="block hero-title-sub">Ikatan Keluarga Alumni SMATQ ABI-UMMI</span>
+            </h1>
+            <p class="hero-desc">
+              Membangun jejaring alumni, berbagi inspirasi, dan menjadi jembatan menuju masa depan.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-9">
+              <a href="#pendataan" class="btn-primary">
+                Mulai Pendataan <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <a href="#tentang" class="btn-secondary">
+                Tentang IKRAABI
+              </a>
+            </div>
+          </div>
+
+          <!-- illustration -->
+          <div class="relative" data-aos="fade-left" data-aos-duration="800" data-aos-delay="150">
+            <div class="illustration-frame">
+              <svg viewBox="0 0 420 420" class="w-full h-auto float-slow" aria-hidden="true">
+                <defs>
+                  <linearGradient id="illGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#E5BA44" />
+                    <stop offset="100%" stop-color="#F07821" />
+                  </linearGradient>
+                  <linearGradient id="illGrad2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+                  </linearGradient>
+                </defs>
+                <circle cx="210" cy="210" r="180" fill="url(#illGrad2)" />
+                <circle cx="210" cy="210" r="180" fill="none" stroke="url(#illGrad)" stroke-width="2"
+                  stroke-dasharray="4 8" />
+                <!-- graduation cap figure (simplified) -->
+                <g transform="translate(210,195)">
+                  <ellipse cx="0" cy="60" rx="70" ry="14" fill="#0F356B" opacity="0.25" />
+                  <rect x="-28" y="0" width="56" height="70" rx="18" fill="#FFFFFF" opacity="0.9" />
+                  <circle cx="0" cy="-24" r="34" fill="#FFFFFF" />
+                  <polygon points="-46,-34 0,-54 46,-34 0,-14" fill="url(#illGrad)" />
+                  <rect x="-3" y="-34" width="6" height="30" fill="url(#illGrad)" />
+                  <circle cx="0" cy="-6" r="5" fill="url(#illGrad)" />
+                </g>
+                <g class="twinkle" fill="#E5BA44">
+                  <circle cx="70" cy="90" r="4" />
+                  <circle cx="350" cy="120" r="3" />
+                  <circle cx="90" cy="330" r="3" />
+                  <circle cx="330" cy="300" r="4" />
+                </g>
+              </svg>
+            </div>
+            <div class="badge-float badge-float-1">🎓 200+ Alumni</div>
+            <div class="badge-float badge-float-2">🏆 Berprestasi</div>
+          </div>
+        </div>
+
+        <!-- stat cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-16 md:mt-20" data-aos="fade-up"
+          data-aos-delay="200">
+          <div class="stat-card">
+            <span class="stat-icon">👨‍🎓</span>
+            <span class="stat-number" data-count="512">0</span>
+            <span class="stat-label">Alumni Terdata</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🏫</span>
+            <span class="stat-number" data-count="38">0</span>
+            <span class="stat-label">Kampus Mitra</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🏆</span>
+            <span class="stat-number" data-count="64">0</span>
+            <span class="stat-label">Prestasi Alumni</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🎓</span>
+            <span class="stat-number" data-count="10">0</span>
+            <span class="stat-label">Alumni Lulus Kampus</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-wave" aria-hidden="true"></div>
+    </section>
+
+    <!-- =============================== ABOUT =============================== -->
+    <section id="tentang" class="section-pad bg-white dark:bg-[#081527]">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div data-aos="fade-right">
+            <span class="section-eyebrow">Profil Organisasi</span>
+            <h2 class="section-title">Tentang IKRAABI</h2>
+            <p class="section-desc">
+              IKRAABI (Ikatan Keluarga Alumni SMATQ ABI-UMMI) merupakan wadah resmi yang menghubungkan
+              seluruh alumni
+              SMATQ ABI-UMMI. Kami hadir untuk membangun hubungan yang erat antar alumni, menjadi pusat
+              informasi, media
+              kolaborasi, serta wadah berbagi pengalaman lintas angkatan.
+            </p>
+            <p class="section-desc">
+              Melalui berbagai program, IKRAABI turut membantu adik kelas mempersiapkan masa depan,
+              sekaligus mendukung
+              perkembangan karier dan kontribusi alumni bagi masyarakat luas.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 mt-8">
+              <div class="value-chip"><i data-lucide="heart-handshake" class="w-5 h-5"></i> Silaturahmi
+                Alumni</div>
+              <div class="value-chip"><i data-lucide="database" class="w-5 h-5"></i> Pusat Informasi</div>
+              <div class="value-chip"><i data-lucide="graduation-cap" class="w-5 h-5"></i> Bimbingan Adik
+                Kelas</div>
+              <div class="value-chip"><i data-lucide="network" class="w-5 h-5"></i> Jejaring Nasional
+              </div>
+            </div>
+          </div>
+
+          <!-- timeline -->
+          <div class="timeline" data-aos="fade-left">
+            <div class="timeline-item">
+              <span class="timeline-dot"><i data-lucide="school" class="w-4 h-4"></i></span>
+              <div>
+                <h4>Lulus</h4>
+                <p>Menyelesaikan pendidikan di SMATQ ABI-UMMI</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"><i data-lucide="user-check" class="w-4 h-4"></i></span>
+              <div>
+                <h4>Menjadi Alumni</h4>
+                <p>Resmi menyandang status alumni SMATQ ABI-UMMI</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"><i data-lucide="link-2" class="w-4 h-4"></i></span>
+              <div>
+                <h4>Terhubung melalui IKRAABI</h4>
+                <p>Bergabung dalam jaringan resmi alumni</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"><i data-lucide="messages-square" class="w-4 h-4"></i></span>
+              <div>
+                <h4>Berbagi Pengalaman</h4>
+                <p>Berkontribusi lewat cerita, ilmu, dan bimbingan</p>
+              </div>
+            </div>
+            <div class="timeline-item timeline-item-last">
+              <span class="timeline-dot"><i data-lucide="sparkles" class="w-4 h-4"></i></span>
+              <div>
+                <h4>Menginspirasi Generasi Berikutnya</h4>
+                <p>Menjadi teladan bagi adik-adik kelas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== PROGRAM =============================== -->
+    <section id="program" class="section-pad section-tinted">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="section-eyebrow justify-center">Layanan Kami</span>
+          <h2 class="section-title">Program IKRAABI</h2>
+          <p class="section-desc">Berbagai program yang dirancang untuk mendukung alumni dalam berjejaring,
+            berkembang,
+            dan berkontribusi.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
+          <!-- program cards injected identically -->
+          <div class="program-card" data-aos="fade-up" data-aos-delay="0">
+            <span class="program-icon">📋</span>
+            <h3>Pendataan Alumni</h3>
+            <p>Mendaftarkan data diri sebagai alumni resmi SMATQ ABI-UMMI.</p>
+            <a href="#pendataan" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="50">
+            <span class="program-icon">🎂</span>
+            <h3>Pendataan Ulang Tahun</h3>
+            <p>Agar alumni saling mengingat dan mendoakan di hari istimewa.</p>
+            <a href="#pendataan" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="100">
+            <span class="program-icon">🏆</span>
+            <h3>Pendataan Prestasi</h3>
+            <p>Dokumentasi capaian alumni untuk dipublikasikan dan diapresiasi.</p>
+            <a href="#pendataan" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="150">
+            <span class="program-icon">🎓</span>
+            <h3>Pendataan Kampus Alumni</h3>
+            <p>Memetakan sebaran alumni di berbagai perguruan tinggi Indonesia.</p>
+            <a href="#pendataan" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="0">
+            <span class="program-icon">📚</span>
+            <h3>Info Beasiswa</h3>
+            <p>Informasi terbaru seputar beasiswa dalam dan luar negeri.</p>
+            <a href="#informasi" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="50">
+            <span class="program-icon">🏫</span>
+            <h3>Kampus Nusantara</h3>
+            <p>Mengenal kampus-kampus tempat alumni menempuh pendidikan tinggi.</p>
+            <a href="#kampus" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="100">
+            <span class="program-icon">💼</span>
+            <h3>Career &amp; Networking</h3>
+            <p>Membuka peluang karier melalui koneksi antar alumni.</p>
+            <a href="#kontak" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="program-card" data-aos="fade-up" data-aos-delay="150">
+            <span class="program-icon">🤝</span>
+            <h3>Kolaborasi Alumni</h3>
+            <p>Kolaborasi lintas angkatan untuk kegiatan sosial dan edukasi.</p>
+            <a href="#kontak" class="program-link">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== PENDATAAN =============================== -->
+    <section id="pendataan" class="section-pad bg-white dark:bg-[#081527] relative overflow-hidden">
+      <div class="star-overlay star-overlay-light" aria-hidden="true"></div>
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="section-eyebrow justify-center">Aksi Utama</span>
+          <h2 class="section-title">Pusat Pendataan IKRAABI</h2>
+          <p class="section-desc">Seluruh proses pendataan dilakukan melalui Google Form agar mudah diakses
+            kapan saja,
+            di mana saja.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
+          <div class="data-card" data-aos="fade-up" data-aos-delay="0">
+            <span class="data-icon"><i data-lucide="user-plus" class="w-6 h-6"></i></span>
+            <h3>Pendataan Alumni</h3>
+            <p>Daftarkan dirimu sebagai alumni resmi dan lengkapi profil keanggotaan.</p>
+            <a data-form-key="alumni" href="#" target="_blank" rel="noopener" class="data-btn">Isi Form <i
+                data-lucide="external-link" class="w-4 h-4"></i></a>
+          </div>
+          <div class="data-card" data-aos="fade-up" data-aos-delay="80">
+            <span class="data-icon"><i data-lucide="cake" class="w-6 h-6"></i></span>
+            <h3>Pendataan Ulang Tahun</h3>
+            <p>Bagikan tanggal lahirmu agar keluarga alumni dapat saling mendoakan.</p>
+            <a data-form-key="ulangtahun" href="#" target="_blank" rel="noopener" class="data-btn">Isi Form
+              <i data-lucide="external-link" class="w-4 h-4"></i></a>
+          </div>
+          <div class="data-card" data-aos="fade-up" data-aos-delay="160">
+            <span class="data-icon"><i data-lucide="trophy" class="w-6 h-6"></i></span>
+            <h3>Pendataan Prestasi</h3>
+            <p>Ceritakan pencapaianmu untuk menginspirasi alumni lainnya.</p>
+            <a data-form-key="prestasi" href="#" target="_blank" rel="noopener" class="data-btn">Isi Form <i
+                data-lucide="external-link" class="w-4 h-4"></i></a>
+          </div>
+          <div class="data-card" data-aos="fade-up" data-aos-delay="240">
+            <span class="data-icon"><i data-lucide="landmark" class="w-6 h-6"></i></span>
+            <h3>Pendataan Kampus Alumni</h3>
+            <p>Bantu kami memetakan sebaran kampus alumni di seluruh Indonesia.</p>
+            <a data-form-key="kampus" href="#" target="_blank" rel="noopener" class="data-btn">Isi Form <i
+                data-lucide="external-link" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== INFORMASI (CAROUSEL) =============================== -->
+    <section id="informasi" class="section-pad section-tinted">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-6 mb-4" data-aos="fade-up">
+          <div>
+            <span class="section-eyebrow">Update Terkini</span>
+            <h2 class="section-title mb-0">Informasi Alumni</h2>
+          </div>
+          <div class="hidden sm:flex gap-3">
+            <button class="carousel-nav" id="infoPrev" aria-label="Sebelumnya"><i data-lucide="chevron-left"
+                class="w-5 h-5"></i></button>
+            <button class="carousel-nav" id="infoNext" aria-label="Berikutnya"><i data-lucide="chevron-right"
+                class="w-5 h-5"></i></button>
+          </div>
+        </div>
+
+        <div class="swiper infoSwiper mt-8" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper pb-2">
+
+            <div class="swiper-slide">
+              <div class="info-card">
+                <div class="info-img" style="background:linear-gradient(135deg,#154F92,#1D6CB4)">
+                  <i data-lucide="graduation-cap" class="w-10 h-10 text-white/90"></i>
+                </div>
+                <span class="info-tag">🎓 Beasiswa</span>
+                <h3>Info Beasiswa Terbaru</h3>
+                <p>Kumpulan informasi beasiswa dalam dan luar negeri untuk alumni dan adik kelas.</p>
+                <a href="#" class="info-link">Lihat Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="info-card">
+                <div class="info-img" style="background:linear-gradient(135deg,#C1932E,#E5BA44)">
+                  <i data-lucide="landmark" class="w-10 h-10 text-white/90"></i>
+                </div>
+                <span class="info-tag">🏫 Kampus</span>
+                <h3>Kampus Nusantara</h3>
+                <p>Mengenal kampus-kampus pilihan alumni SMATQ ABI-UMMI di seluruh Indonesia.</p>
+                <a href="#kampus" class="info-link">Lihat Selengkapnya <i data-lucide="arrow-right"
+                    class="w-4 h-4"></i></a>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="info-card">
+                <div class="info-img" style="background:linear-gradient(135deg,#E25E14,#F07821)">
+                  <i data-lucide="calendar-days" class="w-10 h-10 text-white/90"></i>
+                </div>
+                <span class="info-tag">📅 Event</span>
+                <h3>Event Alumni</h3>
+                <p>Agenda temu alumni, seminar, dan kegiatan silaturahmi terbaru.</p>
+                <a href="#" class="info-link">Lihat Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="info-card">
+                <div class="info-img" style="background:linear-gradient(135deg,#0F356B,#8B6214)">
+                  <i data-lucide="trophy" class="w-10 h-10 text-white/90"></i>
+                </div>
+                <span class="info-tag">🏆 Prestasi</span>
+                <h3>Prestasi Alumni</h3>
+                <p>Berbagai pencapaian membanggakan dari keluarga besar alumni.</p>
+                <a href="#prestasi" class="info-link">Lihat Selengkapnya <i data-lucide="arrow-right"
+                    class="w-4 h-4"></i></a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== KAMPUS NUSANTARA =============================== -->
+    <section id="kampus" class="section-pad bg-white dark:bg-[#081527]">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="section-eyebrow justify-center">Jaringan Nasional</span>
+          <h2 class="section-title">Persebaran Alumni di Indonesia</h2>
+          <p class="section-desc">Alumni SMATQ ABI-UMMI tersebar dan berkarya di berbagai perguruan tinggi
+            ternama
+            se-Indonesia.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-5 gap-10 mt-14 items-center">
+          <!-- simplified archipelago illustration -->
+          <div class="lg:col-span-2" data-aos="fade-right">
+            <svg viewBox="0 0 400 220" class="w-full h-auto">
+              <g fill="currentColor" class="text-blue-1/15 dark:text-blue-1/25">
+                <ellipse cx="40" cy="120" rx="30" ry="14" />
+                <ellipse cx="100" cy="100" rx="55" ry="20" />
+                <ellipse cx="185" cy="130" rx="40" ry="16" />
+                <ellipse cx="255" cy="105" rx="45" ry="18" />
+                <ellipse cx="330" cy="125" rx="50" ry="20" />
+              </g>
+              <g class="map-dot">
+                <circle cx="60" cy="112" r="5" fill="#F07821" />
+                <circle cx="95" cy="95" r="5" fill="#E5BA44" />
+                <circle cx="130" cy="105" r="5" fill="#1D6CB4" />
+                <circle cx="190" cy="122" r="5" fill="#F07821" />
+                <circle cx="250" cy="98" r="5" fill="#1D6CB4" />
+                <circle cx="280" cy="112" r="5" fill="#E5BA44" />
+                <circle cx="320" cy="118" r="5" fill="#F07821" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="lg:col-span-3 grid sm:grid-cols-2 gap-3.5" data-aos="fade-left">
+            <div class="campus-item"><span>Universitas Negeri Semarang</span><b>10 Alumni</b></div>
+            <div class="campus-item"><span>Universitas Gadjah Mada</span><b>9 Alumni</b></div>
+            <div class="campus-item"><span>Universitas Diponegoro</span><b>10 Alumni</b></div>
+            <div class="campus-item"><span>Institut Teknologi Bandung</span><b>7 Alumni</b></div>
+            <div class="campus-item"><span>Universitas Indonesia</span><b>11 Alumni</b></div>
+            <div class="campus-item"><span>Institut Teknologi Sepuluh Nopember</span><b>6 Alumni</b></div>
+            <div class="campus-item"><span>Universitas Airlangga</span><b>8 Alumni</b></div>
+            <div class="campus-item"><span>Universitas Brawijaya</span><b>10 Alumni</b></div>
+            <div class="campus-item"><span>Universitas Padjadjaran</span><b>5 Alumni</b></div>
+            <div class="campus-item"><span>Universitas Sebelas Maret</span><b>13 Alumni</b></div>
+            <a href="#" class="sm:col-span-2 btn-outline justify-center mt-2">
+              Lihat Persebaran Lengkap <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== PRESTASI =============================== -->
+    <section id="prestasi" class="section-pad section-tinted">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="section-eyebrow justify-center">Kebanggaan Alumni</span>
+          <h2 class="section-title">Prestasi Alumni</h2>
+          <p class="section-desc">Sebagian capaian membanggakan dari keluarga besar alumni SMATQ ABI-UMMI.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
+          <div class="achieve-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="achieve-photo" style="background:linear-gradient(135deg,#1D6CB4,#0F356B)">A</div>
+            <span class="achieve-year">2025</span>
+            <h4>Ahmad Fauzan</h4>
+            <p class="achieve-cat">Akademik</p>
+            <p class="achieve-desc">Juara 1 Olimpiade Sains Nasional bidang Matematika.</p>
+          </div>
+          <div class="achieve-card" data-aos="fade-up" data-aos-delay="80">
+            <div class="achieve-photo" style="background:linear-gradient(135deg,#F07821,#C84E0C)">S</div>
+            <span class="achieve-year">2024</span>
+            <h4>Siti Nur Aini</h4>
+            <p class="achieve-cat">Tahfidz</p>
+            <p class="achieve-desc">Juara 2 Musabaqah Hifzil Qur'an tingkat provinsi.</p>
+          </div>
+          <div class="achieve-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="achieve-photo" style="background:linear-gradient(135deg,#E5BA44,#8B6214)">R</div>
+            <span class="achieve-year">2024</span>
+            <h4>Rizky Maulana</h4>
+            <p class="achieve-cat">Karya Ilmiah</p>
+            <p class="achieve-desc">Finalis Lomba Karya Tulis Ilmiah Mahasiswa Nasional.</p>
+          </div>
+          <div class="achieve-card" data-aos="fade-up" data-aos-delay="240">
+            <div class="achieve-photo" style="background:linear-gradient(135deg,#0F356B,#1D6CB4)">N</div>
+            <span class="achieve-year">2023</span>
+            <h4>Nadia Ramadhani</h4>
+            <p class="achieve-cat">Kewirausahaan</p>
+            <p class="achieve-desc">Penerima pendanaan Program Wirausaha Merdeka.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== CTA =============================== -->
+    <section class="cta-section relative overflow-hidden">
+      <div class="star-overlay" aria-hidden="true"></div>
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center relative z-10" data-aos="zoom-in">
+        <h2 class="cta-title">Menjadi Bagian dari Jejaring Alumni SMATQ ABI-UMMI</h2>
+        <p class="cta-desc">Satu data dirimu, mempererat seluruh keluarga besar alumni.</p>
+        <a data-form-key="gabung" href="#" target="_blank" rel="noopener" class="btn-cta">
+          Gabung Sekarang <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================== FOOTER =============================== -->
+  <footer id="kontak" class="footer-section">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <div class="flex items-center gap-2.5 mb-4">
+            <img src="image/logo-smatq.png" alt="Logo Yayasan AU" class="w-11 h-11 object-contain">
+            <img src="image/tanpa-nama.png" alt="Logo IKRAABI" class="w-11 h-11 object-contain">
+            <span class="font-bold text-lg text-white">IKRAABI</span>
+          </div>
+          <p class="footer-text">Ikatan Keluarga Alumni SMATQ ABI-UMMI — merajut silaturahmi, membangun masa
+            depan.</p>
+        </div>
+        <div>
+          <h5 class="footer-heading">Menu</h5>
+          <ul class="footer-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang IKRAABI</a></li>
+            <li><a href="#program">Program</a></li>
+            <li><a href="#pendataan">Pendataan</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="footer-heading">Media Sosial</h5>
+          <ul class="footer-links">
+            <li><a href="https://instagram.com/ikraabi.official" target="_blank" rel="noopener"><i
+                  data-lucide="instagram" class="w-4 h-4 inline mr-1.5"></i>Instagram</a></li>
+            <li><a href="https://wa.link/pbik05" target="_blank" rel="noopener"><i data-lucide="instagram"
+                  class="w-4 h-4 inline mr-1.5"></i>Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="footer-heading">Alamat</h5>
+          <p class="footer-text flex gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-1 shrink-0"></i>Jl. Tol
+            Semarang
+            - Solo No.35, Keboan, Tanduk, Ampel, Boyolali Regency, Central Java 57352, Kompleks SMATQ
+            ABI-UMMI,
+            Indonesia</p>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <p class="footer-copy">© <span id="year"></span> IKRAABI — Ikatan Keluarga Alumni SMATQ ABI-UMMI. Seluruh
+        hak
+        cipta dilindungi.</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop" aria-label="Kembali ke atas" class="back-to-top">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
