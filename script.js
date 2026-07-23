@@ -15,6 +15,7 @@
     initSmoothAnchors();
     initCounters();
     initSwiper();
+    initCampusSearch();
     initBackToTop();
     bindGoogleForms();
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -140,6 +141,39 @@
       a11y: { enabled: true },
     });
     return swiper;
+  }
+
+  /* Pencarian langsung (live search) pada Direktori / Persebaran Alumni */
+  function initCampusSearch() {
+    const input = document.getElementById('campusSearch');
+    const list = document.getElementById('campusList');
+    if (!input || !list) return;
+
+    const items = Array.from(list.querySelectorAll('.campus-item'));
+    const emptyState = document.getElementById('campusEmpty');
+    const countLabel = document.getElementById('campusCount');
+    const total = items.length;
+
+    const updateCount = (visible) => {
+      if (!countLabel) return;
+      countLabel.textContent = `Menampilkan ${visible} dari ${total} kampus`;
+    };
+
+    const filter = () => {
+      const query = input.value.trim().toLowerCase();
+      let visible = 0;
+      items.forEach((item) => {
+        const name = item.textContent.toLowerCase();
+        const match = name.includes(query);
+        item.classList.toggle('is-hidden', !match);
+        if (match) visible += 1;
+      });
+      if (emptyState) emptyState.classList.toggle('hidden', visible !== 0);
+      updateCount(visible);
+    };
+
+    input.addEventListener('input', filter);
+    updateCount(total);
   }
 
   /* Tombol kembali ke atas */
