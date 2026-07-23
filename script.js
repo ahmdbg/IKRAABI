@@ -1,7 +1,12 @@
+/* =========================================================
+   IKRAABI — script.js
+   Semua interaksi frontend: navbar, dark mode, counter,
+   carousel, back-to-top, dan binding tombol ke Google Form.
+========================================================= */
 (function () {
   'use strict';
 
-  const boot = () => {
+  document.addEventListener('DOMContentLoaded', () => {
     initIcons();
     initAOS();
     initNavbar();
@@ -12,50 +17,58 @@
     initSwiper();
     initBackToTop();
     bindGoogleForms();
-    const year = document.getElementById('year');
-    if (year) year.textContent = new Date().getFullYear();
-  };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  });
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-
-  function initIcons() { if (window.lucide) lucide.createIcons(); }
+  function initIcons() {
+    if (window.lucide) lucide.createIcons();
+  }
 
   function initAOS() {
     if (window.AOS) AOS.init({ once: true, duration: 700, offset: 60, easing: 'ease-out-cubic' });
   }
 
+  /* Navbar: transparan di atas, glass effect saat discroll */
   function initNavbar() {
     const nav = document.getElementById('navbar');
-    if (!nav) return;
-    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    const onScroll = () => {
+      if (window.scrollY > 24) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
 
+  /* Menu mobile */
   function initMobileMenu() {
     const btn = document.getElementById('menuToggle');
     const menu = document.getElementById('mobileMenu');
     if (!btn || !menu) return;
-
-    const setState = (open) => {
-      menu.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', String(open));
-      btn.innerHTML = open ? '<i data-lucide="x" class="w-6 h-6"></i>' : '<i data-lucide="menu" class="w-6 h-6"></i>';
+    btn.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+      btn.innerHTML = isOpen
+        ? '<i data-lucide="x" class="w-6 h-6"></i>'
+        : '<i data-lucide="menu" class="w-6 h-6"></i>';
       if (window.lucide) lucide.createIcons();
-    };
-
-    btn.addEventListener('click', () => setState(!menu.classList.contains('open')));
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setState(false)));
+    });
+    menu.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+        if (window.lucide) lucide.createIcons();
+      })
+    );
   }
 
+  /* Dark mode toggle, tersimpan di localStorage */
   function initDarkMode() {
     const toggle = document.getElementById('darkToggle');
     const root = document.documentElement;
-    if (!toggle) return;
-
     const saved = localStorage.getItem('ikraabi-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
     if (saved === 'dark' || (!saved && prefersDark)) root.classList.add('dark');
 
     toggle.addEventListener('click', () => {
@@ -64,20 +77,23 @@
     });
   }
 
+  /* Smooth scroll untuk anchor internal, mempertimbangkan tinggi navbar */
   function initSmoothAnchors() {
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
       link.addEventListener('click', (e) => {
         const id = link.getAttribute('href');
-        if (!id || id.length < 2) return;
+        if (id.length < 2) return;
         const target = document.querySelector(id);
         if (!target) return;
         e.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY - 84;
+        const offset = 84;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       });
     });
   }
 
+  /* Animasi angka statistik saat masuk viewport */
   function initCounters() {
     const counters = document.querySelectorAll('.stat-number');
     if (!counters.length) return;
@@ -96,36 +112,53 @@
       requestAnimationFrame(step);
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.4 });
-
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
     counters.forEach((c) => observer.observe(c));
   }
 
+  /* Carousel informasi (SwiperJS) */
   function initSwiper() {
     if (!window.Swiper) return;
-    new Swiper('.infoSwiper', {
+    const swiper = new Swiper('.infoSwiper', {
       slidesPerView: 1.05,
       spaceBetween: 20,
-      breakpoints: { 640: { slidesPerView: 2, spaceBetween: 20 }, 1024: { slidesPerView: 3, spaceBetween: 24 } },
+      breakpoints: {
+        640: { slidesPerView: 2, spaceBetween: 20 },
+        1024: { slidesPerView: 3, spaceBetween: 24 },
+      },
       navigation: { nextEl: '#infoNext', prevEl: '#infoPrev' },
-      a11y: { enabled: true }
+      a11y: { enabled: true },
     });
+    return swiper;
   }
 
+  /* Tombol kembali ke atas */
   function initBackToTop() {
     const btn = document.getElementById('backToTop');
     if (!btn) return;
-    window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 480), { passive: true });
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (window.scrollY > 480) btn.classList.add('show');
+        else btn.classList.remove('show');
+      },
+      { passive: true }
+    );
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
+  /* Menghubungkan setiap tombol pendataan ke URL Google Form
+     berdasarkan konfigurasi window.IKRAABI_CONFIG.forms */
   function bindGoogleForms() {
     const forms = (window.IKRAABI_CONFIG && window.IKRAABI_CONFIG.forms) || {};
     document.querySelectorAll('[data-form-key]').forEach((el) => {
